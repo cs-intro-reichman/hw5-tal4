@@ -20,14 +20,17 @@ public class MyString {
      * @return the number of times c appears in str
      */
     public static int countChar(String str, char ch) {
-        //// Replace the following statement with your code
-        return 0;
+        int count = 0;
+        for(int i = 0; i < str.length(); i++) {
+            if(str.charAt(i) == ch) count++;
+        }
+        return count;
     }
 
     /** Returns true if str1 is a subset string str2, false otherwise
      *  Examples:
      *  subsetOf("sap","space") returns true
-     *  subsetOf("spa","space") returns true
+     *  subsetOf("spa","space") returns false
      *  subsetOf("pass","space") returns false
      *  subsetOf("c","space") returns true
      *
@@ -36,8 +39,16 @@ public class MyString {
      * @return true is str1 is a subset of str2, false otherwise
      */
     public static boolean subsetOf(String str1, String str2) {
-         //// Replace the following statement with your code
-        return false;
+        if(str1.length() > str2.length()) {
+            return false;
+        }
+        for(int i = 0; i < str1.length(); i++) {
+            char ch = str1.charAt(i);
+            if(countChar(str1, ch) > countChar(str2, ch)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /** Returns a string which is the same as the given string, with a space
@@ -49,8 +60,14 @@ public class MyString {
      * @return a string consisting of the characters of str, separated by spaces.
      */
     public static String spacedString(String str) {
-        //// Replace the following statement with your code
-        return null;
+        String out = "";
+        for(int i = 0; i < str.length() - 1; i++) {
+            out += str.charAt(i) + " ";
+        }
+        if(str.length() > 0) {
+            out += str.charAt(str.length() - 1);
+        }
+        return out;
     }
   
     /**
@@ -64,8 +81,11 @@ public class MyString {
      * @return a randomly generated string, consisting of 'n' lowercase letters
      */
     public static String randomStringOfLetters(int n) {
-        //// Replace the following statement with your code
-        return null;
+        String out = "";
+        for (int i = 0; i < n; i++) {
+            out += (char) ((int) (Math.random() * 26) + 'a');
+        }
+        return out;
     }
 
     /**
@@ -78,8 +98,32 @@ public class MyString {
      * @return a string consisting of str1 minus all the characters of str2
      */
     public static String remove(String str1, String str2) {
-       //// Replace the following statement with your code
-        return null;
+        for(int i = 0; i < str2.length(); i++) {
+            str1 = removeChar(str1, str2.charAt(i));
+        }
+        return str1;
+    }
+
+    /**
+     * removes the fors ocuurence of c from str and return it as a new string.
+     * @param str a trting
+     * @param c a character contained in the string
+     * @return a new string which is str without the first occurence of c.
+     */
+    public static String removeChar(String str, char c) {
+        int index = str.indexOf(c);
+        if(index == -1) {       //c is not in str
+            return str;
+        }
+        else if (index == str.length() - 1){        //c is the last character in str
+            return str.substring(0, index);
+        }
+        else if(index == 0) {       //c is the first character in str
+            return str.substring(index + 1);
+        }
+        else {      //c is somewhwre in the middle of str
+            return str.substring(0, index) + str.substring(index + 1);
+        }
     }
 
     /**
