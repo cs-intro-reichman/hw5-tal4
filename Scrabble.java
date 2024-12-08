@@ -101,11 +101,11 @@ public class Scrabble {
 			if(input.equals(".")) {
 				break;
 			}
-			else if(!isWordInDictionary(input)) {
-				System.out.println(" No such word in the dictionary. Try again.\n");
-			}
 			else if(!MyString.subsetOf(input, hand)) {
 				System.out.println("Invalid word. Try again.\n");
+			}
+			else if(!isWordInDictionary(input)) {
+				System.out.println(" No such word in the dictionary. Try again.\n");
 			}
 			else {
 				int scoreToAdd = wordScore(input);
